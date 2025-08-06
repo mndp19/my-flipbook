@@ -2,35 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Basic Flipbook</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- your external stylesheet -->
+  <title>Swipeable Flipbook</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="stylesheet" href="./style.css">
-  <!-- load jQuery first -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- then load Turn.js -->
-  <script src="https://www.turnjs.com/lib/turn.min.js"></script>
 </head>
 <body>
   <div id="flipbook">
-    <div class="hard">Turn.js</div>
+    <div class="hard">Cover</div>
     <div class="hard"></div>
-
     <div>Page 1</div>
     <div>Page 2</div>
     <div>Page 3</div>
     <div>Page 4</div>
-
     <div class="hard"></div>
     <div class="hard"></div>
   </div>
 
-  <script type="text/javascript">
-    $(document).ready(function() {
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-touchswipe@1.6.19/jquery.touchSwipe.min.js"></script>
+  <script src="https://www.turnjs.com/lib/turn.min.js"></script>
+  <script>
+    $(function() {
+      // initialize flipbook
       $("#flipbook").turn({
         width: 400,
         height: 300,
-        autoCenter: true
+        autoCenter: true,
+        display: window.innerWidth <= 768 ? 'single' : 'double'
+      });
+
+      // bind swipe gestures
+      $("#flipbook").swipe({
+        swipeLeft:  function() { $("#flipbook").turn("next"); },
+        swipeRight: function() { $("#flipbook").turn("previous"); },
+        threshold: 50
       });
     });
   </script>
