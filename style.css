@@ -11,7 +11,7 @@ body {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-    background: #ffffff; /* white page background */
+    background: #ffffff;     /* white page background */
 }
 
 .flipbook {
@@ -19,46 +19,13 @@ body {
     height: 600px;
 }
 
-/* Base hard-cover styling */
 .flipbook .hard {
-    background: #5D4037 !important; /* deep brown cover */
+    background: #5D4037 !important;  /* deep brown cover */
     color: #fff;
+    font-weight: bold;
     border: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 60px 40px;
 }
 
-/* Title */
-.flipbook .hard.cover h1 {
-    font-size: 3em;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    margin-bottom: 40px;
-}
-
-/* Subtitle */
-.flipbook .hard.cover .subtitle {
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1.2em;
-    line-height: 1.6;
-    margin-bottom: 50px;
-    max-width: 80%;
-}
-
-/* Author credit */
-.flipbook .hard.cover .author {
-    font-size: 1em;
-    font-weight: 300;
-    letter-spacing: 1px;
-    opacity: 0.8;
-}
-
-/* Smaller fine print if needed */
 .flipbook .hard small {
     font-style: italic;
     font-weight: lighter;
@@ -66,26 +33,22 @@ body {
     font-size: 14px;
 }
 
-/* Interior pages */
 .flipbook .page {
-    background: #ffffff; /* pure white interior */
+    background: #ffffff;        /* pure white interior */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
     border: 1px solid rgba(0, 0, 0, 0.11);
-    padding: 40px;
 }
 
-/* Images on interior */
 .page img {
     width: 70%;
     object-fit: cover;
     margin: auto;
 }
 
-/* Captions on interior */
 .flipbook .page small {
     font-size: 14px;
     margin-bottom: 10px;
