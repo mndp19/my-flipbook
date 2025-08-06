@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -8,35 +8,37 @@
   <script src="https://www.turnjs.com/lib/turn.min.js"></script>
 </head>
 <body>
-  <div class="flipbook">
-    <div class="page cover">
-      <h1>Ink & Echo</h1>
-      <p class="subtitle">
-        HOW ROMANTIC 🫶🏼<br>
-        I was trying to turn the world for her,<br>
-        and she turned me in-front of the world!
-      </p>
-      <p class="author">by M. Singh</p>
-    </div>
+  <div class="book-outer">
+    <div class="flipbook">
+      <div class="hard cover-front">
+        <h1>Ink & Echo</h1>
+        <p class="subtitle">
+          HOW ROMANTIC 🫶🏼<br>
+          I was trying to turn the world for her,<br>
+          and she turned me in-front of the world!
+        </p>
+        <p class="author">by M. Singh</p>
+      </div>
 
-    <div class="page">
-      <p>“And in her silence, I found all the answers I was afraid to ask.”</p>
-    </div>
+      <div class="hard"></div> <!-- Inside of front cover -->
 
-    <div class="page">
-      <p>“Some nights I write, not to be read — but to remember I once felt.”</p>
-    </div>
+      <div class="page"><p>“And in her silence, I found all the answers I was afraid to ask.”</p></div>
+      <div class="page"><p>“Some nights I write, not to be read — but to remember I once felt.”</p></div>
+      <div class="page"><p>More pages coming soon...</p></div>
 
-    <div class="page">
-      <p>More pages coming soon...</p>
+      <div class="hard"></div> <!-- Inside of back cover -->
+      <div class="hard cover-back"></div> <!-- Back cover -->
     </div>
   </div>
 
   <script>
     $('.flipbook').turn({
-      width: 800,
+      width: 1000,
       height: 600,
-      autoCenter: true
+      autoCenter: true,
+      elevation: 50,
+      gradients: true,
+      display: 'double'
     });
   </script>
 </body>
