@@ -1,31 +1,63 @@
+/* base page reset */
 body {
+  margin: 0;
+  padding: 0;
   background: #eee;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin: 0;
-  font-family: 'Georgia', serif;
+  touch-action: pan-y;           /* lock vertical pan */
+  -webkit-overflow-scrolling: touch;
 }
 
 #flipbook {
-  width: 400px;
-  height: 300px;
+  /* overflow hidden to prevent page cut-off */
+  overflow: hidden;
+  /* allow backface hidden for smooth 3D */
+  perspective: 1000px;
 }
 
-#flipbook .hard {
+#flipbook .hard,
+#flipbook .page {
+  /* preserve 3d so pages render crisply */
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* cover & hard pages */
+.hard {
   background: #333;
   color: white;
-  font-weight: bold;
   text-align: center;
-  line-height: 300px;
-  border: 2px solid #000;
+  font-weight: bold;
+  line-height: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#flipbook div {
+/* inner pages */
+.page {
   background: white;
-  text-align: center;
-  line-height: 300px;
-  font-size: 18px;
   border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: serif;
+  font-size: 1em;
+  padding: 10px;
+}
+
+/* mobile full-width pages */
+@media (max-width: 768px) {
+  #flipbook .hard,
+  #flipbook .page {
+    width: 100% !important;
+    height: auto !important;
+    line-height: normal !important;
+  }
 }
