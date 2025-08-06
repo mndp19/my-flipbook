@@ -1,20 +1,37 @@
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Flipbook</title>
+  <title>Ink & Echo</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://www.turnjs.com/lib/turn.min.js"></script>
 </head>
 <body>
   <div class="flipbook">
-    <div class="page">Page 1<br>This is the first page of the book.</div>
-    <div class="page">Page 2<br>This is the second page of the book.</div>
-    <div class="page">Page 3<br>This is the third page of the book.</div>
-    <div class="page">Page 4<br>This is the fourth page of the book.</div>
+    <div class="page cover">
+      <h1>Ink & Echo</h1>
+      <p class="subtitle">
+        HOW ROMANTIC 🫶🏼<br>
+        I was trying to turn the world for her,<br>
+        and she turned me in-front of the world!
+      </p>
+      <p class="author">by M. Singh</p>
+    </div>
+
+    <div class="page">
+      <p>“And in her silence, I found all the answers I was afraid to ask.”</p>
+    </div>
+
+    <div class="page">
+      <p>“Some nights I write, not to be read — but to remember I once felt.”</p>
+    </div>
+
+    <div class="page">
+      <p>More pages coming soon...</p>
+    </div>
   </div>
+
   <script>
     $('.flipbook').turn({
       width: 800,
