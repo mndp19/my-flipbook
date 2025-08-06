@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Flipbook</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://www.turnjs.com/lib/turn.min.js"></script>
+</head>
+<body>
+  <div class="flipbook">
+    <div class="page">Page 1<br>This is the first page of the book.</div>
+    <div class="page">Page 2<br>This is the second page of the book.</div>
+    <div class="page">Page 3<br>This is the third page of the book.</div>
+    <div class="page">Page 4<br>This is the fourth page of the book.</div>
+  </div>
+  <script>
+    $('.flipbook').turn({
+      width: 800,
+      height: 600,
+      autoCenter: true
+    });
+  </script>
+</body>
+</html>
