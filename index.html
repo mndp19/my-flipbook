@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Ink & Echo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://www.turnjs.com/lib/turn.min.js"></script>
@@ -10,6 +11,7 @@
 <body>
   <div class="book-outer">
     <div class="flipbook">
+      <!-- Front Cover -->
       <div class="hard cover-front">
         <h1>Ink & Echo</h1>
         <p class="subtitle">
@@ -20,25 +22,42 @@
         <p class="author">by M. Singh</p>
       </div>
 
-      <div class="hard"></div> <!-- Inside of front cover -->
+      <!-- Inside Front Cover -->
+      <div class="hard"></div>
 
-      <div class="page"><p>“And in her silence, I found all the answers I was afraid to ask.”</p></div>
-      <div class="page"><p>“Some nights I write, not to be read — but to remember I once felt.”</p></div>
-      <div class="page"><p>More pages coming soon...</p></div>
+      <!-- Pages -->
+      <div class="page">
+        <p>“And in her silence, I found all the answers I was afraid to ask.”</p>
+      </div>
 
-      <div class="hard"></div> <!-- Inside of back cover -->
-      <div class="hard cover-back"></div> <!-- Back cover -->
+      <div class="page">
+        <p>“Some nights I write, not to be read — but to remember I once felt.”</p>
+      </div>
+
+      <div class="page">
+        <p>More pages coming soon...</p>
+      </div>
+
+      <!-- Inside Back Cover -->
+      <div class="hard"></div>
+
+      <!-- Back Cover -->
+      <div class="hard cover-back"></div>
     </div>
   </div>
 
   <script>
+    function isMobile() {
+      return window.innerWidth <= 768;
+    }
+
     $('.flipbook').turn({
-      width: 1000,
-      height: 600,
+      width: isMobile() ? 500 : 1000,
+      height: isMobile() ? 650 : 600,
       autoCenter: true,
       elevation: 50,
       gradients: true,
-      display: 'double'
+      display: isMobile() ? 'single' : 'double'
     });
   </script>
 </body>
