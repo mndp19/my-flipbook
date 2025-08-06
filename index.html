@@ -4,58 +4,35 @@
   <meta charset="UTF-8">
   <title>Basic Flipbook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      background: #eee;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: sans-serif;
-    }
-    #flipbook {
-      width: 400px;
-      height: 300px;
-    }
-    #flipbook .hard {
-      background: #333;
-      color: white;
-      font-weight: bold;
-      text-align: center;
-      line-height: 300px;
-    }
-    #flipbook div {
-      background: white;
-      text-align: center;
-      line-height: 300px;
-      font-size: 18px;
-      border: 1px solid #ccc;
-    }
-  </style>
+  <!-- your external stylesheet -->
+  <link rel="stylesheet" href="./style.css">
+  <!-- load jQuery first -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/turn.js@4/turn.min.js"></script>
+  <!-- then load Turn.js -->
+  <script src="https://www.turnjs.com/lib/turn.min.js"></script>
 </head>
 <body>
+  <div id="flipbook">
+    <div class="hard">Turn.js</div>
+    <div class="hard"></div>
 
-<div id="flipbook">
-  <div class="hard">Turn.js</div>
-  <div class="hard"></div>
-  <div>Page 1</div>
-  <div>Page 2</div>
-  <div>Page 3</div>
-  <div>Page 4</div>
-  <div class="hard"></div>
-  <div class="hard"></div>
-</div>
+    <div>Page 1</div>
+    <div>Page 2</div>
+    <div>Page 3</div>
+    <div>Page 4</div>
 
-<script type="text/javascript">
-  $("#flipbook").turn({
-    width: 400,
-    height: 300,
-    autoCenter: true
-  });
-</script>
+    <div class="hard"></div>
+    <div class="hard"></div>
+  </div>
 
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("#flipbook").turn({
+        width: 400,
+        height: 300,
+        autoCenter: true
+      });
+    });
+  </script>
 </body>
 </html>
