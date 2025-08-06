@@ -1,23 +1,58 @@
-
 body {
   background: #f0f0f0;
-  font-family: sans-serif;
+  font-family: 'Georgia', serif;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
 }
+
 .flipbook {
   width: 800px;
   height: 600px;
 }
+
 .page {
   width: 400px;
   height: 600px;
   background: white;
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  padding: 40px;
   box-sizing: border-box;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.cover {
+  background: #1e1e1e;
+  color: white;
+  text-align: center;
+  padding-top: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.cover .subtitle {
+  font-style: italic;
+  font-size: 1.2em;
+  margin-bottom: 60px;
+  line-height: 1.6;
+}
+
+.cover .author {
+  font-size: 1.1em;
+  margin-top: 40px;
 }
