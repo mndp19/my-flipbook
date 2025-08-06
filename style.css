@@ -28,7 +28,11 @@ body {
   padding: 40px;
   font-size: 1.2em;
   line-height: 1.6;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .hard {
@@ -68,4 +72,34 @@ body {
 
 .cover-back {
   background: #3e2723;
+}
+
+/* 📱 Mobile Responsive Fix */
+@media (max-width: 768px) {
+  .flipbook {
+    width: 500px !important;
+    height: 650px !important;
+  }
+
+  .page, .hard {
+    width: 500px !important;
+    height: 650px !important;
+  }
+
+  .cover-front h1 {
+    font-size: 2em;
+  }
+
+  .cover-front .subtitle {
+    font-size: 1em;
+  }
+
+  .cover-front .author {
+    font-size: 1em;
+  }
+
+  .page {
+    font-size: 1em;
+    padding: 30px;
+  }
 }
