@@ -2,40 +2,52 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Swipeable Flipbook</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Ink & Echo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="./style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Hammer.js for buttery swipes -->
+  <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/turn.js@4/turn.min.js"></script>
 </head>
 <body>
   <div id="flipbook">
-    <div class="hard">Cover</div>
-    <div class="hard"></div>
-    <div>Page 1</div>
-    <div>Page 2</div>
-    <div>Page 3</div>
-    <div>Page 4</div>
-    <div class="hard"></div>
-    <div class="hard"></div>
+    <div class="hard cover-front">Ink & Echo</div>
+    <div class="hard inside-cover"></div>
+    <div class="page">Page 1</div>
+    <div class="page">Page 2</div>
+    <div class="page">Page 3</div>
+    <div class="page">Page 4</div>
+    <div class="hard inside-cover"></div>
+    <div class="hard cover-back"></div>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery-touchswipe@1.6.19/jquery.touchSwipe.min.js"></script>
-  <script src="https://www.turnjs.com/lib/turn.min.js"></script>
   <script>
     $(function() {
-      // initialize flipbook
-      $("#flipbook").turn({
-        width: 400,
-        height: 300,
+      // Initialize Turn.js with acceleration and custom duration
+      const isMobile = window.innerWidth <= 768;
+      $('#flipbook').turn({
+        width: isMobile ? window.innerWidth - 20 : 400,
+        height: isMobile ? (window.innerWidth - 20) * 0.75 : 300,
+        display: isMobile ? 'single' : 'double',
         autoCenter: true,
-        display: window.innerWidth <= 768 ? 'single' : 'double'
+        acceleration: true,
+        gradients: true,
+        duration: 800  // ms, tweak for faster/slower flip
       });
 
-      // bind swipe gestures
-      $("#flipbook").swipe({
-        swipeLeft:  function() { $("#flipbook").turn("next"); },
-        swipeRight: function() { $("#flipbook").turn("previous"); },
-        threshold: 50
+      // Hammer.js swipe binding
+      const hammer = new Hammer(document.getElementById('flipbook'));
+      hammer.on('swipeleft',  () => $('#flipbook').turn('next'));
+      hammer.on('swiperight', () => $('#flipbook').turn('previous'));
+
+      // On resize, update size and mode
+      $(window).on('resize', () => {
+        const mobile = window.innerWidth <= 768;
+        const w = mobile ? window.innerWidth - 20 : 400;
+        const h = mobile ? w * 0.75 : 300;
+        $('#flipbook').turn('size', w, h);
+        $('#flipbook').turn('display', mobile ? 'single' : 'double');
       });
     });
   </script>
