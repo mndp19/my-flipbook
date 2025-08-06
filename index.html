@@ -2,69 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ink & Echo Flipbook</title>
+  <title>My Flipbook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Your stylesheet -->
   <link rel="stylesheet" href="./style.css">
+  <!-- Load jQuery first -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Then load Turn.js (v0.11) from CDNJS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/0.11/turn.min.js"></script>
 </head>
 <body>
-
-  <div class="book">
-    <!-- Leaf 1: Cover / Inside Front -->
-    <div class="page" data-index="0">
-      <div class="face front">Cover</div>
-      <div class="face back">Inside Front</div>
-    </div>
-    <!-- Leaf 2: Page 1 / Page 2 -->
-    <div class="page" data-index="1">
-      <div class="face front">Page 1</div>
-      <div class="face back">Page 2</div>
-    </div>
-    <!-- Leaf 3: Page 3 / Page 4 -->
-    <div class="page" data-index="2">
-      <div class="face front">Page 3</div>
-      <div class="face back">Page 4</div>
-    </div>
-    <!-- Leaf 4: Inside Back / Back Cover -->
-    <div class="page" data-index="3">
-      <div class="face front">Inside Back</div>
-      <div class="face back">Back Cover</div>
-    </div>
-
-    <div class="controls">
-      <button id="prev">Prev</button>
-      <button id="next">Next</button>
-    </div>
+  <div id="flipbook">
+    <div class="hard">Turn.js</div>
+    <div class="hard"></div>
+    <div>Page 1</div>
+    <div>Page 2</div>
+    <div>Page 3</div>
+    <div>Page 4</div>
+    <div class="hard"></div>
+    <div class="hard"></div>
   </div>
 
-  <script>
-    (function() {
-      const pages = Array.from(document.querySelectorAll('.page'));
-      let currentLeaf = 0;
-
-      function updateButtons() {
-        document.getElementById('prev').disabled = currentLeaf === 0;
-        document.getElementById('next').disabled = currentLeaf === pages.length;
-      }
-
-      document.getElementById('next').addEventListener('click', () => {
-        if (currentLeaf < pages.length) {
-          pages[currentLeaf].classList.add('flipped');
-          currentLeaf++;
-          updateButtons();
-        }
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("#flipbook").turn({
+        width: 400,
+        height: 300,
+        autoCenter: true
       });
-
-      document.getElementById('prev').addEventListener('click', () => {
-        if (currentLeaf > 0) {
-          currentLeaf--;
-          pages[currentLeaf].classList.remove('flipped');
-          updateButtons();
-        }
-      });
-
-      updateButtons();
-    })();
+    });
   </script>
-
 </body>
 </html>
