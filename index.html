@@ -2,36 +2,143 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Flipbook</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="./style.css">
+  <title>Custom Flipbook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Container & perspective */
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f0f0f0;
+    }
+    .book {
+      position: relative;
+      width: 400px;
+      height: 300px;
+      perspective: 1500px;
+    }
+
+    /* Each “leaf” (two faces) */
+    .page {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-style: preserve-3d;
+      transition: transform 0.8s ease;
+    }
+    .page .face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: serif;
+      font-size: 1.2em;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      background: white;
+    }
+    .page .back {
+      transform: rotateY(180deg);
+    }
+
+    /* Stack pages in correct order */
+    .page:nth-child(1) { z-index: 4; }
+    .page:nth-child(2) { z-index: 3; }
+    .page:nth-child(3) { z-index: 2; }
+    .page:nth-child(4) { z-index: 1; }
+
+    /* Flipped state rotates the leaf */
+    .flipped { transform: rotateY(-180deg); }
+
+    /* Simple controls */
+    .controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+    .controls button {
+      pointer-events: all;
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: white;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 1em;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
-  <div id="flipbook">
-    <div class="hard">Turn.js</div>
-    <div class="hard"></div>
 
-    <div class="page">Page 1</div>
-    <div class="page">Page 2</div>
-    <div class="page">Page 3</div>
-    <div class="page">Page 4</div>
+  <div class="book">
+    <!-- Leaf 1: Cover / Inside front -->
+    <div class="page" data-index="0">
+      <div class="face front">Cover</div>
+      <div class="face back">Inside Front</div>
+    </div>
+    <!-- Leaf 2: Page 1 / Page 2 -->
+    <div class="page" data-index="1">
+      <div class="face front">Page 1</div>
+      <div class="face back">Page 2</div>
+    </div>
+    <!-- Leaf 3: Page 3 / Page 4 -->
+    <div class="page" data-index="2">
+      <div class="face front">Page 3</div>
+      <div class="face back">Page 4</div>
+    </div>
+    <!-- Leaf 4: Inside Back / Back Cover -->
+    <div class="page" data-index="3">
+      <div class="face front">Inside Back</div>
+      <div class="face back">Back Cover</div>
+    </div>
 
-    <div class="hard"></div>
-    <div class="hard"></div>
+    <div class="controls">
+      <button id="prev">Prev</button>
+      <button id="next">Next</button>
+    </div>
   </div>
 
-  <!-- jQuery must come first -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <!-- then Turn.js from CDNJS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/0.11/turn.min.js"></script>
   <script>
-    $(function() {
-      $('#flipbook').turn({
-        width: 400,
-        height: 300,
-        autoCenter: true
+    (function() {
+      const pages = Array.from(document.querySelectorAll('.page'));
+      let currentLeaf = 0;
+
+      function updateButtons() {
+        document.getElementById('prev').disabled = currentLeaf === 0;
+        document.getElementById('next').disabled = currentLeaf === pages.length;
+      }
+
+      document.getElementById('next').addEventListener('click', () => {
+        if (currentLeaf < pages.length) {
+          pages[currentLeaf].classList.add('flipped');
+          currentLeaf++;
+          updateButtons();
+        }
       });
-    });
+
+      document.getElementById('prev').addEventListener('click', () => {
+        if (currentLeaf > 0) {
+          currentLeaf--;
+          pages[currentLeaf].classList.remove('flipped');
+          updateButtons();
+        }
+      });
+
+      updateButtons();
+    })();
   </script>
+
 </body>
 </html>
