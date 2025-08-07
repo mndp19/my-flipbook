@@ -19,7 +19,7 @@ body {
     height: 600px;
 }
 
-.flipbook .hard{
+.flipbook .hard {
   background: linear-gradient(180deg, #5D4037 0%, #3E2723 100%) !important;
   color: #FDF6E3;
   display: flex;
