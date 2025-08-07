@@ -5,70 +5,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
-  <title>INK & ECHO 1.943 </title>
+  <title>INK & ECHO 1.944 </title>
 </head>
 
 <body>
   <div class="flipbook">
   
-    <div class="hard" style="
-    /* ensure positioning for the pseudo-strikethrough */
-    position: relative;
-    width: 100%; 
-    height: 100%; 
-    box-sizing: border-box; 
-    padding: 40px; 
-    background: linear-gradient(180deg, #5D4037 0%, #3E2723 100%) !important;
-    text-align: center;
-    font-family: Georgia, serif;
-    color: #FDF6E3;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;">
-  
-  <h1 style="
-      font-size: 3em;
-      margin: 0 0 0.5em;
-      letter-spacing: 0.05em;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-    ">
-    Ink &amp; Echo
-  </h1>
-  
-  <p style="
-      font-size: 1em;
-      font-style: italic;
-      color: rgba(224,215,209,0.8);
-      margin: 0 0 1.5em;
-      position: relative;
-    ">
-    <s>
-    I only write when I’m falling<br>
-    in love or falling apart.
-    </s>
-  </p>
-  
-  <p style="
-      font-size: 1.1em;
-      font-style: italic;
-      line-height: 1.6;
-      margin: 0 0 2em;
-      max-width: 80%;
-      color: #FFF9F0;
-    ">
-    I write when it’s hard to<br>
-    breathe and my lungs fail to play their part
-  </p>
-  
-  <p style="
-      font-size: 1em;
-      font-weight: 300;
-      opacity: 0.85;
-      margin: auto 0 0;
-    ">
-    by M. Singh
-  </p>
+    <div class="hard cover">
+  <div style="
+      width: 100%; 
+      height: 100%; 
+      box-sizing: border-box; 
+      padding: 40px; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: space-between;
+      text-align: center;
+  ">
+    <!-- Title -->
+    <h1 style="margin: 0; font-size: 2.8em; letter-spacing: 0.05em;">
+      Ink &amp; Echo
+    </h1>
+
+    <!-- Middle block (subtitle + quote) -->
+    <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+      <p style="margin: 0 0 1em; font-style: italic; color: rgba(224,215,209,0.8); text-decoration: line-through;">
+        I only write when I’m falling<br>
+        in love or falling apart.
+      </p>
+      <p style="margin: 0; font-size: 1.1em; font-style: italic; line-height: 1.6;">
+        “I write when it’s hard to<br>
+        breathe and my lungs fail to play their part”
+      </p>
+    </div>
+
+    <!-- Author -->
+    <p style="margin: 0; font-size: 1em; opacity: 0.9;">
+      by M. Singh
+    </p>
+  </div>
 </div>
 
 <div class="hard"></div>
