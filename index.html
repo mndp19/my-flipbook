@@ -5,13 +5,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
-  <title>INK & ECHO 1.91 </title>
+  <title>INK & ECHO 1.92 </title>
 </head>
 
 <body>
   <div class="flipbook">
   
-    <div class="hard">
+    <div class="hard" style="
+    /* ensure positioning for the pseudo-strikethrough */
+    position: relative;
+    /* generous padding */
+    padding: 60px 40px;
+    /* override background inherited */
+    text-align: center;
+    font-family: Georgia, serif;
+    color: #FDF6E3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;>
   
   <h1 style="
       font-size: 3em;
@@ -27,11 +39,12 @@
       font-style: italic;
       color: rgba(224,215,209,0.8);
       margin: 0 0 1.5em;
-      display: inline-block;
       position: relative;
     ">
+    <s>
     I only write when I’m falling<br>
     in love or falling apart.
+    </s>
     <span style="
         position: absolute;
         top: 50%;
