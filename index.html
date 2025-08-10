@@ -737,23 +737,23 @@
   <script>
   $(function () {
     const $book = $('.flipbook');
-    const MARGIN = 16; // breathing room
+    const MARGIN = 16;
 
     function layout() {
       const vw = Math.max(320, window.innerWidth - MARGIN * 2);
       const vh = Math.max(320, window.innerHeight - MARGIN * 2);
-      const single = vw <= 900; // breakpoint for single-page mode
+      const single = vw <= 900;
 
       if (single) {
         // SINGLE PAGE (portrait): H ≈ 1.2 × W
-        const pageRatio = 7 / 5; // H/W
+        const pageRatio = 7 / 5;
         let w = Math.min(vw, 520);
         let h = Math.round(w * pageRatio);
         if (h > vh) { h = vh; w = Math.round(h / pageRatio); }
         return { w, h, mode: 'single' };
       } else {
         // DOUBLE SPREAD (landscape): W/H ≈ 5/3
-        const spreadRatio = 5 / 3; // W/H
+        const spreadRatio = 5 / 3;
         let w = Math.min(vw, 1000);
         let h = Math.round(w / spreadRatio);
         if (h > vh) { h = vh; w = Math.round(h * spreadRatio); if (w > vw) w = vw; }
@@ -776,30 +776,28 @@
           gradients: true,
           elevation: 50
         });
+
+        $book.on('turning', function (e, page) {
+          const isSingle = $book.turn('display') === 'single';
+          const cur = $book.turn('page');
+          if (isSingle && cur === 1 && page === 2) {
+            e.preventDefault();
+            $book.turn('page', 3);
+          }
+        });
       }
     }
 
-    // first render
     apply();
 
-    // Start on page 2 in single mode so the first flip is from the right
-    if ($book.turn('display') === 'single' && $book.turn('page') === 1) {
-      $book.turn('page', 2);
-    }
-
-    // debounced resize/orientation
     let t;
     $(window).on('resize orientationchange', function () {
       clearTimeout(t);
-      t = setTimeout(function () {
-        apply();
-        if ($book.turn('display') === 'single' && $book.turn('page') === 1) {
-          $book.turn('page', 2);
-        }
-      }, 120);
+      t = setTimeout(apply, 120);
     });
   });
 </script>
+
 
 
 
