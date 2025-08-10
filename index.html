@@ -3,7 +3,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
-  <title>INK & ECHO v1.967 </title>
+  <title>INK & ECHO v2.0 </title>
 </head>
 
 <body>
@@ -733,6 +733,54 @@
   <script>
     $(".flipbook").turn();
   </script>
+
+  <script>
+  (function () {
+    const $book = $('.flipbook'); // or $('#flipbook') if you use an id
+
+    // Decide size and mode from current screen
+    function bookLayout() {
+      const isPhone = window.innerWidth <= 768;
+      // width fits the viewport with a tiny margin
+      const w = Math.min(window.innerWidth - 24, 1000);
+      // aspect ratio ~ 5:3 feels book-like; tweak if you want taller pages
+      const h = Math.round(w * (3 / 5));
+      const mode = isPhone ? 'single' : 'double';
+      return { w, h, mode };
+    }
+
+    function initOrResize() {
+      const { w, h, mode } = bookLayout();
+
+      // already initialized?
+      if ($book.data('turn')) {
+        $book.turn('size', w, h);
+        $book.turn('display', mode);
+      } else {
+        $book.turn({
+          width: w,
+          height: h,
+          display: mode,
+          autoCenter: true,
+          acceleration: true,
+          gradients: true,
+          elevation: 50
+        });
+      }
+    }
+
+    // first run
+    $(initOrResize);
+
+    // update on rotate / resize / URL bar changes
+    window.addEventListener('resize', initOrResize);
+    window.addEventListener('orientationchange', initOrResize);
+
+    // Optional: if a page has an overlay (like a spine), make sure it doesn't block touches
+    // Give those overlays: style="pointer-events:none"
+  })();
+</script>
+  
 </body>
 
 </html>
