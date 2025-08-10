@@ -3,7 +3,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
-  <title>INK & ECHO v2.0 </title>
+  <title>INK & ECHO v2.1 </title>
 </head>
 
 <body>
@@ -496,7 +496,7 @@
     
     <div>
       <small>
-        "When I was burning for her, She kept complaining about smoke."
+        "When I was burning for her, She kept complaining about smoke"
       <p style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); font-size: 0.8em; color: #999;">
       14
       </p>
@@ -737,44 +737,32 @@
   <script>
   $(function () {
     const $book = $('.flipbook');
-    const MARGIN = 16; // a little breathing room
+    const MARGIN = 16; // breathing room
 
     function layout() {
       const vw = Math.max(320, window.innerWidth - MARGIN * 2);
       const vh = Math.max(320, window.innerHeight - MARGIN * 2);
-
-      // Choose single vs double
-      const single = vw <= 900; // feel free to tweak this breakpoint
+      const single = vw <= 900; // breakpoint for single-page mode
 
       if (single) {
-        // SINGLE PAGE: page aspect = 5:6 (W/H), so H = 1.2 * W
-        const pageRatio = 6 / 5;              // H/W
-        let w = Math.min(vw, 520);            // cap width on phones
-        let h = Math.round(w * pageRatio);    // target height
-
-        if (h > vh) {                         // if too tall, fit by height
-          h = vh;
-          w = Math.round(h / pageRatio);
-        }
+        // SINGLE PAGE (portrait): H ≈ 1.2 × W
+        const pageRatio = 6 / 5; // H/W
+        let w = Math.min(vw, 520);
+        let h = Math.round(w * pageRatio);
+        if (h > vh) { h = vh; w = Math.round(h / pageRatio); }
         return { w, h, mode: 'single' };
       } else {
-        // DOUBLE SPREAD: spread aspect = 5:3 (W/H), so H = 0.6 * W
-        const spreadRatio = 5 / 3;            // W/H
-        let w = Math.min(vw, 1000);           // your desktop width
-        let h = Math.round(w / spreadRatio);  // target height
-
-        if (h > vh) {                         // if too tall, fit by height
-          h = vh;
-          w = Math.round(h * spreadRatio);
-          if (w > vw) w = vw;                 // final safety clamp
-        }
+        // DOUBLE SPREAD (landscape): W/H ≈ 5/3
+        const spreadRatio = 5 / 3; // W/H
+        let w = Math.min(vw, 1000);
+        let h = Math.round(w / spreadRatio);
+        if (h > vh) { h = vh; w = Math.round(h * spreadRatio); if (w > vw) w = vw; }
         return { w, h, mode: 'double' };
       }
     }
 
     function apply() {
       const { w, h, mode } = layout();
-
       if ($book.data('turn')) {
         $book.turn('display', mode);
         $book.turn('size', w, h);
@@ -791,14 +779,28 @@
       }
     }
 
-    // Debounce rapid resize/orientation events
-    let t;
-    function onResize() { clearTimeout(t); t = setTimeout(apply, 120); }
-
+    // first render
     apply();
-    $(window).on('resize orientationchange', onResize);
+
+    // Start on page 2 in single mode so the first flip is from the right
+    if ($book.turn('display') === 'single' && $book.turn('page') === 1) {
+      $book.turn('page', 2);
+    }
+
+    // debounced resize/orientation
+    let t;
+    $(window).on('resize orientationchange', function () {
+      clearTimeout(t);
+      t = setTimeout(function () {
+        apply();
+        if ($book.turn('display') === 'single' && $book.turn('page') === 1) {
+          $book.turn('page', 2);
+        }
+      }, 120);
+    });
   });
 </script>
+
 
 
   
